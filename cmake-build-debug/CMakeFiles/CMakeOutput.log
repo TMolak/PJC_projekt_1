@@ -440,3 +440,53 @@ Parsed CXX implicit link information from above output:
   implicit fwks: []
 
 
+Determining if the include file sys/types.h exists passed with the following output:
+Change Dir: C:/Users/tomek/CLionProjects/PJC_projekt_1/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe cmTC_436b3 && [1/2] Building C object CMakeFiles/cmTC_436b3.dir/CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_436b3.exe
+
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: C:/Users/tomek/CLionProjects/PJC_projekt_1/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe cmTC_9a3a9 && [1/2] Building C object CMakeFiles/cmTC_9a3a9.dir/CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_9a3a9.exe
+
+
+
+Determining if the include file stddef.h exists passed with the following output:
+Change Dir: C:/Users/tomek/CLionProjects/PJC_projekt_1/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe cmTC_7b5fa && [1/2] Building C object CMakeFiles/cmTC_7b5fa.dir/CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_7b5fa.exe
+
+
+
+Determining size of void* passed with the following output:
+Change Dir: C:/Users/tomek/CLionProjects/PJC_projekt_1/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe cmTC_29094 && [1/2] Building C object CMakeFiles/cmTC_29094.dir/SIZEOF_VOID_PTR.c.obj
+[2/2] Linking C executable cmTC_29094.exe
+
+
+
+Determining if the include file dinput.h exists passed with the following output:
+Change Dir: C:/Users/tomek/CLionProjects/PJC_projekt_1/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe cmTC_d28a1 && [1/2] Building C object CMakeFiles/cmTC_d28a1.dir/CheckIncludeFile.c.obj
+[2/2] Linking C executable cmTC_d28a1.exe
+
+
+
+Performing C++ SOURCE FILE Test ATOMIC_TEST succeeded with the following output:
+Change Dir: C:/Users/tomek/CLionProjects/PJC_projekt_1/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/Program Files/JetBrains/CLion 2022.3.2/bin/ninja/win/x64/ninja.exe cmTC_b25b3 && [1/2] Building CXX object CMakeFiles/cmTC_b25b3.dir/src.cxx.obj
+[2/2] Linking CXX executable cmTC_b25b3.exe
+
+
+Source file was:
+#include <atomic>
+        int main(){std::atomic_ullong x(1); return x.fetch_add(1);}

@@ -2,5 +2,10 @@ cmake_minimum_required(VERSION 3.24)
 project(PJC_projekt_1)
 
 set(CMAKE_CXX_STANDARD 23)
-
+set(BUILD_SHARED_LIBS FALSE)
+include(FetchContent)
+FetchContent_Declare(SFML GIT_REPOSITORY https://github.com/SFML/SFML.git)
+FetchContent_MakeAvailable(SFML)
 add_executable(PJC_projekt_1 main.cpp)
+target_link_libraries(PJC_projekt_1 PRIVATE sfml-graphics)
+
