@@ -3,53 +3,53 @@
 
 using namespace std;
 
-//void pattern() {
-//    //gorna piramida
-//    for (int i = 1; i <= 5; i++) {
-//        for (int j = 1; j <= 5 - i; j++) {
-//            std::cout << "    ";
-//        }
-//        for (int j = 1; j <= i; j++) {
-//            std::cout << "O       ";
-//        }
-//        std::cout << std::endl;
-//    }
-//    //srodek
-//    for (int i = 0; i < 4; ++i) {
-//        cout<<"    0   ";
-//    }
-//    cout << endl;
-//    //dolna piramida
-//    for (int i = 5; i >= 1; i--) {
-//        for (int j = 1; j <= 5 - i; j++) {
-//            std::cout << "    ";
-//        }
-//        for (int j = 1; j <= i; j++) {
-//            std::cout << "O       ";
-//        }
-//        std::cout << std::endl;
-//    }
-//}
-
-
 
 int main() {
 //tworzenie okna
-    sf::RenderWindow window(sf::VideoMode({800, 600}), "Test",
+    sf::RenderWindow window(sf::VideoMode({1000, 1000}), "Hexxagon",
                             sf::Style::Default,
                             sf::ContextSettings(0, 0, 8));
 
-    sf::CircleShape hexagon(60, 6);
-    hexagon.setFillColor(sf::Color::Magenta);
-
+    window.clear(sf::Color::White);
+    const float radius = 40.f;
+    sf::CircleShape hexagon(radius, 6);
 
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed){
                 window.close();
+            }
+//            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+//                hexagon.setFillColor(sf::Color::Green);
+//            }
         }
-        window.draw(hexagon);
+
+        const int rows = 7;
+        const int columns = 7;
+        const float posX = 100.f;
+        const float posY = 100.f;
+        const float spacingX = 90.f;
+        const float spacingY = 90.f;
+
+        window.clear(sf::Color::White);
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < columns - i; j++)
+            {
+                hexagon.setFillColor(sf::Color::Magenta);
+                hexagon.setOutlineThickness(2.f);
+                hexagon.setOutlineColor(sf::Color::Black);
+
+                float x = posX + (spacingX * j) + (i * (spacingX / 2.f));
+                float y = posY + (spacingY * i);
+
+                hexagon.setPosition({x, y});
+                window.draw(hexagon);
+            }
+        }
+
         window.display();
     }
 }
