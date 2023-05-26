@@ -11,19 +11,6 @@ int main() {
                             sf::ContextSettings(0, 0, 8));
 
     window.clear(sf::Color::White);
-    const float radius = 40.f;
-    sf::CircleShape hexagon(radius, 6);
-
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed){
-                window.close();
-            }
-//            if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-//                hexagon.setFillColor(sf::Color::Green);
-//            }
-        }
 
         const int rows = 7;
         const int columns = 7;
@@ -31,6 +18,9 @@ int main() {
         const float posY = 100.f;
         const float spacingX = 90.f;
         const float spacingY = 90.f;
+        const float radius = 40.f;
+
+        vector<sf::CircleShape> hexagons;
 
         window.clear(sf::Color::White);
 
@@ -38,18 +28,34 @@ int main() {
         {
             for (int j = 0; j < columns - i; j++)
             {
+                sf::CircleShape hexagon(radius, 6);
                 hexagon.setFillColor(sf::Color::Magenta);
                 hexagon.setOutlineThickness(2.f);
                 hexagon.setOutlineColor(sf::Color::Black);
-
                 float x = posX + (spacingX * j) + (i * (spacingX / 2.f));
                 float y = posY + (spacingY * i);
 
                 hexagon.setPosition({x, y});
+                hexagons.push_back(hexagon);
                 window.draw(hexagon);
             }
         }
-
+    while (window.isOpen()) {
+        sf::Event event;
+        while (window.pollEvent(event)) {
+            if (event.type == sf::Event::Closed){
+                window.close();
+            }else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+                for (sf::CircleShape& hexagon : hexagons) {
+                    if (hexagon.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) {
+                        hexagon.setFillColor(sf::Color::Green);
+                    }
+                }
+           }
+        }
+        for (const sf::CircleShape& hexagon : hexagons) {
+            window.draw(hexagon);
+        }
         window.display();
     }
 }
