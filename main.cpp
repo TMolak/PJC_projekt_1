@@ -42,6 +42,8 @@ int main() {
                             sf::ContextSettings(0, 0, 8));
 
     window.clear(sf::Color::White);
+
+
     for (int i = 0; i < 17; i++) {
         for (int j = 0; j < 9; j++) {
             sf::CircleShape hexagon(radius, 6);
