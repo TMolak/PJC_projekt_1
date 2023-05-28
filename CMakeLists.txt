@@ -6,6 +6,6 @@ set(BUILD_SHARED_LIBS FALSE)
 include(FetchContent)
 FetchContent_Declare(SFML GIT_REPOSITORY https://github.com/SFML/SFML.git)
 FetchContent_MakeAvailable(SFML)
-add_executable(PJC_projekt_1 main.cpp)
+add_executable(PJC_projekt_1 main.cpp Menu.cpp Menu.h)
 target_link_libraries(PJC_projekt_1 PRIVATE sfml-graphics)
 

@@ -1,10 +1,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
+#include "Menu.h"
 using namespace std;
 
-const int rows = 7;
-const int columns = 7;
 const float posX = 100.f;
 const float posY = 100.f;
 const float spacingX = 60.f;
@@ -15,6 +13,7 @@ vector<sf::CircleShape> hexagons;
 
 
 int main() {
+
 
     int boardPattern[17][9] = {
             {0, 0, 0, 0, 4, 0, 0, 0, 0},
@@ -83,11 +82,12 @@ int main() {
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
-            } else if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+            }
+            if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
                 for (sf::CircleShape &hexagon: hexagons) {
                     if (hexagon.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)) &&
                         hexagon.getFillColor() != sf::Color::White && hexagon.getFillColor() != sf::Color::Blue) {
-                        hexagon.setFillColor(sf::Color::Green);
+                        hexagon.setOutlineColor(sf::Color::Cyan);
                     }
                 }
             }

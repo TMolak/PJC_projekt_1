@@ -57,6 +57,14 @@ build CMakeFiles/PJC_projekt_1.dir/main.cpp.obj: CXX_COMPILER__PJC_projekt_1_Deb
   OBJECT_DIR = CMakeFiles\PJC_projekt_1.dir
   OBJECT_FILE_DIR = CMakeFiles\PJC_projekt_1.dir
 
+build CMakeFiles/PJC_projekt_1.dir/Menu.cpp.obj: CXX_COMPILER__PJC_projekt_1_Debug C$:/Users/tomek/CLionProjects/PJC_projekt_1/Menu.cpp || cmake_object_order_depends_target_PJC_projekt_1
+  DEFINES = -DSFML_STATIC
+  DEP_FILE = CMakeFiles\PJC_projekt_1.dir\Menu.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++23
+  INCLUDES = -IC:/Users/tomek/CLionProjects/PJC_projekt_1/cmake-build-debug/_deps/sfml-src/include
+  OBJECT_DIR = CMakeFiles\PJC_projekt_1.dir
+  OBJECT_FILE_DIR = CMakeFiles\PJC_projekt_1.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target PJC_projekt_1
@@ -65,7 +73,7 @@ build CMakeFiles/PJC_projekt_1.dir/main.cpp.obj: CXX_COMPILER__PJC_projekt_1_Deb
 #############################################
 # Link the executable PJC_projekt_1.exe
 
-build PJC_projekt_1.exe: CXX_EXECUTABLE_LINKER__PJC_projekt_1_Debug CMakeFiles/PJC_projekt_1.dir/main.cpp.obj | _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a || _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
+build PJC_projekt_1.exe: CXX_EXECUTABLE_LINKER__PJC_projekt_1_Debug CMakeFiles/PJC_projekt_1.dir/main.cpp.obj CMakeFiles/PJC_projekt_1.dir/Menu.cpp.obj | _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a || _deps/sfml-build/lib/libsfml-graphics-s-d.a _deps/sfml-build/lib/libsfml-system-s-d.a _deps/sfml-build/lib/libsfml-window-s-d.a
   FLAGS = -g
   LINK_LIBRARIES = _deps/sfml-build/lib/libsfml-graphics-s-d.a  _deps/sfml-build/lib/libsfml-window-s-d.a  _deps/sfml-build/lib/libsfml-system-s-d.a  -lopengl32  -lwinmm  -lgdi32  _deps/sfml-src/extlibs/libs-mingw/x64/libfreetype.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\PJC_projekt_1.dir
