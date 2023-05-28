@@ -17,11 +17,11 @@ vector<sf::CircleShape> hexagons;
 int main() {
 
     int boardPattern[17][9] = {
-            {0, 0, 0, 0, 1, 0, 0, 0, 0},
+            {0, 0, 0, 0, 4, 0, 0, 0, 0},
             {0, 0, 0, 1, 1, 0, 0, 0, 0},
             {0, 0, 0, 1, 1, 1, 0, 0, 0},
             {0, 0, 1, 1, 1, 1, 0, 0, 0},
-            {0, 0, 1, 1, 1, 1, 1, 0, 0},
+            {0, 0, 3, 1, 1, 1, 3, 0, 0},
             {0, 0, 1, 1, 1, 1, 0, 0, 0},
             {0, 0, 1, 1, 2, 1, 1, 0, 0},
             {0, 0, 1, 1, 1, 1, 0, 0, 0},
@@ -29,11 +29,11 @@ int main() {
             {0, 0, 1, 2, 2, 1, 0, 0, 0},
             {0, 0, 1, 1, 1, 1, 1, 0, 0},
             {0, 0, 1, 1, 1, 1, 0, 0, 0},
-            {0, 0, 1, 1, 1, 1, 1, 0, 0},
+            {0, 0, 4, 1, 1, 1, 4, 0, 0},
             {0, 0, 1, 1, 1, 1, 0, 0, 0},
             {0, 0, 0, 1, 1, 1, 0, 0, 0},
             {0, 0, 0, 1, 1, 0, 0, 0, 0},
-            {0, 0, 0, 0, 1, 0, 0, 0, 0}
+            {0, 0, 0, 0, 3, 0, 0, 0, 0}
     };
 
 //tworzenie okna
@@ -54,6 +54,12 @@ int main() {
                 hexagon.setOutlineColor(sf::Color::Black);
             } else if (boardPattern[i][j] == 2) {
                 hexagon.setFillColor(sf::Color::Blue);
+                hexagon.setOutlineColor(sf::Color::Black);
+            }else if (boardPattern[i][j] == 3) {
+                hexagon.setFillColor(sf::Color::Yellow);
+                hexagon.setOutlineColor(sf::Color::Black);
+            }else if (boardPattern[i][j] == 4) {
+                hexagon.setFillColor(sf::Color::Red);
                 hexagon.setOutlineColor(sf::Color::Black);
             }
             hexagon.setOutlineThickness(2.f);
