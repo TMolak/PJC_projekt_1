@@ -93,8 +93,9 @@ int main() {
                             sf::ContextSettings(0, 0, 8));
 
     window.clear(sf::Color::White);
-
-Board board(boardPattern);
+Menu menu(800, 800);
+menu.draw(window);
+//Board board(boardPattern);
 
 
 
@@ -106,10 +107,10 @@ Board board(boardPattern);
                 window.close();
             }
             if (event.type == sf::Event::MouseButtonPressed){
-                board.mouseClick(event);
+//                board.mouseClick(event);
             }
         }
-        board.draw(window);
+//        board.draw(window);
         window.display();
     }
 }

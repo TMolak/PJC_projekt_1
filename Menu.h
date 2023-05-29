@@ -1,8 +1,9 @@
-#include <SFML/Graphics.hpp>
-
 #ifndef PJC_PROJEKT_1_MENU_H
 #define PJC_PROJEKT_1_MENU_H
 
+#include <SFML/Graphics.hpp>
+
+#define MENU_SIZE 4
 
 class Menu {
 public:
@@ -14,7 +15,7 @@ public:
 private:
     int selected;
     sf::Font font;
-    sf::Text text[4];
+    sf::Text menu[MENU_SIZE];
 };
 
 
