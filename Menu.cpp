@@ -1,36 +1,42 @@
+#include <iostream>
 #include "Menu.h"
 
 Menu::Menu(float width, float height) {
-    if (!font.loadFromFile("./Starjedi.ttf")) {
-        //error
+
+    if (!font.loadFromFile("fonts/Starjedi.ttf")) {
+        std::cout << "Nie zaladowano fontu" << std::endl;
     }
-    menu[0].setFont(font);
-    menu[0].setString("Nowa gra");
-    menu[0].setFillColor(sf::Color::Red);
-    menu[0].setPosition(sf::Vector2f(width / 2, height / (MENU_SIZE+1)*1));
 
-    menu[1].setFont(font);
-    menu[1].setString("Wczytaj grę");
-    menu[1].setFillColor(sf::Color::Red);
-    menu[1].setPosition(sf::Vector2f(width / 2, height / (MENU_SIZE+1)*2));
 
-    menu[2].setFont(font);
-    menu[2].setString("Najlepsze wyniki");
-    menu[2].setFillColor(sf::Color::Red);
-    menu[2].setPosition(sf::Vector2f(width / 2, height / (MENU_SIZE+1)*3));
+    text[1].setFont(font);
+    text[1].setFillColor(sf::Color::Red);
+    text[1].setString("Nowa gra");
+    text[1].setCharacterSize(70);
+    text[1].setPosition(sf::Vector2f(width / 2, height / (MENU_SIZE + 1) * 1));
 
-    menu[3].setFont(font);
-    menu[3].setString("Wyjdz");
-    menu[3].setFillColor(sf::Color::Red);
-    menu[3].setPosition(sf::Vector2f(width / 2, height / (MENU_SIZE+1)*4));
+    text[2].setFont(font);
+    text[2].setFillColor(sf::Color::Red);
+    text[2].setString("Wczytaj grę");
+    text[2].setCharacterSize(70);
+    text[2].setPosition(sf::Vector2f(width / 2, height / (MENU_SIZE + 1) * 2));
+
+    text[3].setFont(font);
+    text[3].setFillColor(sf::Color::Red);
+    text[3].setString("Najlepsze wyniki");
+    text[3].setCharacterSize(70);
+    text[3].setPosition(sf::Vector2f(width / 2, height / (MENU_SIZE + 1) * 3));
+
+    text[4].setFont(font);
+    text[4].setFillColor(sf::Color::Red);
+    text[4].setString("Wyjdz");
+    text[4].setCharacterSize(70);
+    text[4].setPosition(sf::Vector2f(width / 2, height / (MENU_SIZE + 1) * 4));
 }
 
-Menu::~Menu() {
+Menu::~Menu() {}
 
-}
-
-void Menu::draw(sf::RenderWindow& window){
-    for (int i = 0; i < MENU_SIZE-1; ++i) {
-        window.draw(menu[i]);
+void Menu::draw(sf::RenderWindow& window) {
+    for (int i = 0; i < MENU_SIZE - 1; ++i) {
+        window.draw(text[i]);
     }
 }

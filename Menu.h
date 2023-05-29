@@ -10,12 +10,12 @@ public:
     Menu(float width, float height);
     ~Menu();
 
-    void draw(sf::RenderWindow &window);
+    void draw(sf::RenderWindow& window);
 
 private:
-    int selected;
+    int selected{};
     sf::Font font;
-    sf::Text menu[MENU_SIZE];
+    sf::Text text[MENU_SIZE];
 };
 
 

@@ -1,10 +1,11 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "Menu.h"
+
+#define MENU_SIZE 4
+
 using namespace std;
 
 const float radius = 30.0f;
-
 
 
 class Board{
@@ -93,8 +94,8 @@ int main() {
                             sf::ContextSettings(0, 0, 8));
 
     window.clear(sf::Color::White);
-Menu menu(800, 800);
-menu.draw(window);
+MainMenu mainMenu(800, 800);
+mainMenu.draw(window);
 //Board board(boardPattern);
 
 

@@ -5,10 +5,10 @@
 613	5612	7062119550189318	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Win32/SleepImpl.cpp.obj	7884c082b4b2cd4b
 45613	56008	7062120054088177	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/TextureSaver.cpp.obj	a6dff64655d59a9d
 1	1792	7062119511989281	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Sleep.cpp.obj	7380d0b9f68a08fd
-18823	19424	7069137794064089	_deps/sfml-build/lib/libsfml-window-s-d.a	397e11272a5afd30
 24062	27216	7069137871989681	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RectangleShape.cpp.obj	50e84663fe7e7f32
-441	11325	7062119607315656	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Vector3.cpp.obj	6689e09af31bcce0
+18823	19424	7069137794064089	_deps/sfml-build/lib/libsfml-window-s-d.a	397e11272a5afd30
 6235	12258	7069137722089423	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/CursorImpl.cpp.obj	24218d94c41c4de9
+441	11325	7062119607315656	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Vector3.cpp.obj	6689e09af31bcce0
 20291	32317	7069137922986079	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/Texture.cpp.obj	588630fe6703da20
 5	1710	7069137616929019	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Vector2.cpp.obj	f30dca064bb6bc1b
 183	6956	7062119563625809	_deps/sfml-build/src/SFML/System/CMakeFiles/sfml-system.dir/Err.cpp.obj	483788801bde4fa1
@@ -48,7 +48,7 @@
 18231	31955	7068037633866629	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Win32/JoystickImpl.cpp.obj	f5407b53312d1a04
 4962	10963	7069137709428730	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowImpl.cpp.obj	da7bd5ad50695bc3
 32317	43909	7069138038901899	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/VertexBuffer.cpp.obj	77de33bd926a563b
-82	5122	7070657148232134	CMakeFiles/PJC_projekt_1.dir/main.cpp.obj	33d4e69eb28ca020
+106	5453	7070915008140038	CMakeFiles/PJC_projekt_1.dir/main.cpp.obj	33d4e69eb28ca020
 31683	37241	7069137972239631	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/VertexArray.cpp.obj	8466db76db409576
 2824	14011	7069137739943329	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/Window.cpp.obj	2b82a264c6808000
 3777	13256	7069137732383373	_deps/sfml-build/src/SFML/Window/CMakeFiles/sfml-window.dir/WindowBase.cpp.obj	235979b235f896c3
@@ -66,6 +66,8 @@
 32068	38116	7069137980968425	_deps/sfml-build/src/SFML/Graphics/CMakeFiles/sfml-graphics.dir/RenderTextureImplFBO.cpp.obj	1f1ffe2f8a52f0f3
 43909	44852	7069138048327232	_deps/sfml-build/lib/libsfml-graphics-s-d.a	ec61935f148ade9a
 2874	4201	7070629447367298	PJC_projekt_1.exe	fffbddebbeed2bed
-4	10760	7070658835072865	build.ninja	ce02d85a5cc212be
-5	2691	7070628878829520	CMakeFiles/PJC_projekt_1.dir/Menu.cpp.obj	2a8340a72169e002
-84	3970	7070658965196865	CMakeFiles/PJC_projekt_1.dir/main.cpp.obj	33d4e69eb28ca020
+4	10760	7070917967938713	build.ninja	ce02d85a5cc212be
+80	3961	7070917195079213	CMakeFiles/PJC_projekt_1.dir/Menu.cpp.obj	2a8340a72169e002
+77	3935	7070918393076618	CMakeFiles/PJC_projekt_1.dir/main.cpp.obj	33d4e69eb28ca020
+150	5195	7070918405674176	CMakeFiles/PJC_projekt_1.dir/Menu.cpp.obj	2a8340a72169e002
+77	4042	7070921531439954	CMakeFiles/PJC_projekt_1.dir/main.cpp.obj	33d4e69eb28ca020
