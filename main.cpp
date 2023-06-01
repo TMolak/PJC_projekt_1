@@ -5,6 +5,30 @@
 
 using namespace std;
 
+const float radius = 30.0f;
+const int x = 1920;
+const int y = 1080;
+
+int boardPattern[17][9] = {
+        {0, 0, 0, 0, 4, 0, 0, 0, 0},
+        {0, 0, 0, 1, 1, 0, 0, 0, 0},
+        {0, 0, 0, 1, 1, 1, 0, 0, 0},
+        {0, 0, 1, 1, 1, 1, 0, 0, 0},
+        {0, 0, 3, 1, 1, 1, 3, 0, 0},
+        {0, 0, 1, 1, 1, 1, 0, 0, 0},
+        {0, 0, 1, 1, 2, 1, 1, 0, 0},
+        {0, 0, 1, 1, 1, 1, 0, 0, 0},
+        {0, 0, 1, 1, 1, 1, 1, 0, 0},
+        {0, 0, 1, 2, 2, 1, 0, 0, 0},
+        {0, 0, 1, 1, 1, 1, 1, 0, 0},
+        {0, 0, 1, 1, 1, 1, 0, 0, 0},
+        {0, 0, 4, 1, 1, 1, 4, 0, 0},
+        {0, 0, 1, 1, 1, 1, 0, 0, 0},
+        {0, 0, 0, 1, 1, 1, 0, 0, 0},
+        {0, 0, 0, 1, 1, 0, 0, 0, 0},
+        {0, 0, 0, 0, 3, 0, 0, 0, 0}
+};
+
 enum class MenuOption {
     NewGame,
     LoadGame,
@@ -24,25 +48,25 @@ MenuOption showMenuWindow(sf::RenderWindow &window, sf::Font &font) {
     newGameText.setString("Nowa gra");
     newGameText.setCharacterSize(24);
     newGameText.setFillColor(sf::Color::White);
-    newGameText.setPosition({100, 100});
+    newGameText.setPosition({100, (y / 2 - 100)});
 
     sf::Text loadGameText(font);
     loadGameText.setString("Wczytaj gre");
     loadGameText.setCharacterSize(24);
     loadGameText.setFillColor(sf::Color::White);
-    loadGameText.setPosition({100, 150});
+    loadGameText.setPosition({100, (y / 2 - 100) + 50});
 
     sf::Text highScoresText(font);
     highScoresText.setString("Najlepsze wyniki");
     highScoresText.setCharacterSize(24);
     highScoresText.setFillColor(sf::Color::White);
-    highScoresText.setPosition({100, 200});
+    highScoresText.setPosition({100, (y / 2 - 100) + 100});
 
     sf::Text exitText(font);
     exitText.setString("Wyjscie");
     exitText.setCharacterSize(24);
     exitText.setFillColor(sf::Color::White);
-    exitText.setPosition({100, 250});
+    exitText.setPosition({100, (y / 2 - 100) + 150});
 
     while (window.isOpen()) {
         sf::Event event;
@@ -90,13 +114,13 @@ GameMode showGameModeMenu(sf::RenderWindow &window, sf::Font &font) {
     PvP.setString("Gra na innego gracza");
     PvP.setCharacterSize(24);
     PvP.setFillColor(sf::Color::White);
-    PvP.setPosition({100, 100});
+    PvP.setPosition({100, (y / 2 - 100)});
 
     sf::Text PvC(font);
     PvC.setString("Gra z komputerem");
     PvC.setCharacterSize(24);
     PvC.setFillColor(sf::Color::White);
-    PvC.setPosition({100, 150});
+    PvC.setPosition({100, (y / 2 - 100) + 50});
 
     while (window.isOpen()) {
         sf::Event event;
@@ -133,29 +157,8 @@ GameMode showGameModeMenu(sf::RenderWindow &window, sf::Font &font) {
 
 int main() {
 
-
-    int boardPattern[17][9] = {
-            {0, 0, 0, 0, 4, 0, 0, 0, 0},
-            {0, 0, 0, 1, 1, 0, 0, 0, 0},
-            {0, 0, 0, 1, 1, 1, 0, 0, 0},
-            {0, 0, 1, 1, 1, 1, 0, 0, 0},
-            {0, 0, 3, 1, 1, 1, 3, 0, 0},
-            {0, 0, 1, 1, 1, 1, 0, 0, 0},
-            {0, 0, 1, 1, 2, 1, 1, 0, 0},
-            {0, 0, 1, 1, 1, 1, 0, 0, 0},
-            {0, 0, 1, 1, 1, 1, 1, 0, 0},
-            {0, 0, 1, 2, 2, 1, 0, 0, 0},
-            {0, 0, 1, 1, 1, 1, 1, 0, 0},
-            {0, 0, 1, 1, 1, 1, 0, 0, 0},
-            {0, 0, 4, 1, 1, 1, 4, 0, 0},
-            {0, 0, 1, 1, 1, 1, 0, 0, 0},
-            {0, 0, 0, 1, 1, 1, 0, 0, 0},
-            {0, 0, 0, 1, 1, 0, 0, 0, 0},
-            {0, 0, 0, 0, 3, 0, 0, 0, 0}
-    };
-
 //tworzenie okna
-    sf::RenderWindow window(sf::VideoMode({1920, 1080}), "Hexxagon",
+    sf::RenderWindow window(sf::VideoMode({x, y}), "Hexxagon",
                             sf::Style::Default,
                             sf::ContextSettings(0, 0, 8));
     sf::Texture background;
@@ -166,13 +169,14 @@ int main() {
     sf::Sprite backgroundSprite(background);
     window.draw(backgroundSprite);
     window.clear(sf::Color::White);
-    Player playerOne(sf::Color::Yellow);
-    Player playerTwo(sf::Color::Red);
 
     sf::Font font;
     if (!font.loadFromFile("C:\\Users\\tomek\\CLionProjects\\PJC_projekt_1\\fonts\\Starjedi.ttf")) {
         std::cout << "Blad ladowania czcionki" << std::endl;
     }
+    Player playerOne(sf::Color::Yellow);
+    Player playerTwo(sf::Color::Red);
+
     sf::Text playerOneScore(font);
     playerOneScore.setString("Hexagony gracza 1 :");
     playerOneScore.setCharacterSize(24);
@@ -187,9 +191,8 @@ int main() {
 
     Board board(boardPattern);
 
-    board.setCurrentPlayer(playerOne);
-    GameMode gameMode = GameMode::PvP;
 
+    int turn = 1;
 
     while (window.isOpen()) {
         MenuOption option = showMenuWindow(window, font);
@@ -204,23 +207,26 @@ int main() {
                                             sf::Style::Default,
                                             sf::ContextSettings(0, 0, 8));
 
-                // Inicjalizacja planszy i graczy
+
                 Board board(boardPattern);
-                board.setCurrentPlayer(playerOne);
 
                 // Pętla gry w nowym oknie
                 while (gameWindow.isOpen()) {
                     sf::Event event;
+                    if (turn % 2 != 0) {
+                        board.setCurrentPlayer(playerOne);
+                    } else {
+                        board.setCurrentPlayer(playerTwo);
+                    }
                     while (gameWindow.pollEvent(event)) {
                         if (event.type == sf::Event::Closed) {
                             gameWindow.close();
+                        } else if (event.type == sf::Event::MouseButtonPressed &&
+                                   event.mouseButton.button == sf::Mouse::Left) {
+                            board.closeHexagons(event);
                         }
-                        // Obsługa zdarzeń gry (kliknięcia, zmiana koloru itp.)
-
-                        board.mouseClick(event, playerOne);
-                        board.hexagonColorChange(event, playerOne);
+                        turn++;
                     }
-
                     // Aktualizacja stanu gry
 
                     // Czyszczenie, rysowanie i wyświetlanie planszy oraz innych elementów gry
