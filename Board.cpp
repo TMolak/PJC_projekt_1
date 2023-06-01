@@ -1,6 +1,7 @@
 #include "Board.h"
 #include "Hexagon.h"
 #include <cmath>
+
 const float radius = 30.0f;
 int boardPattern[17][9] = {
         {0, 0, 0, 0, 4, 0, 0, 0, 0},
@@ -21,6 +22,7 @@ int boardPattern[17][9] = {
         {0, 0, 0, 1, 1, 0, 0, 0, 0},
         {0, 0, 0, 0, 3, 0, 0, 0, 0}
 };
+
 Board::Board(int pattern[17][9]) {
     for (int i = 0; i < 17; i++) {
         for (int j = 0; j < 9; j++) {
@@ -30,7 +32,7 @@ Board::Board(int pattern[17][9]) {
             if (i % 2 != 0 && i != 0) {
                 x += radius * 1.7;
             }
-            position = { x, y };
+            position = {x, y};
             Hexagon hexagon(radius, position);
 
             sf::Angle rotation(90);
@@ -41,6 +43,7 @@ Board::Board(int pattern[17][9]) {
                 hexagon.setFillColor(sf::Color::Transparent);
             } else if (pattern[i][j] == 3) {
                 hexagon.setFillColor(sf::Color::Yellow);
+
                 hexagon.setOutlineColor(sf::Color::Black);
             } else if (pattern[i][j] == 4) {
                 hexagon.setFillColor(sf::Color::Red);
@@ -51,26 +54,56 @@ Board::Board(int pattern[17][9]) {
             hexagon.setOutlineThickness(2.f);
 
 
-
             hexagon.rotate(rotation);
             hexagons.push_back(hexagon);
         }
     }
 }
 
-void Board::draw(sf::RenderWindow& window) {
-    for (const Hexagon& hexagon : hexagons) {
+void Board::draw(sf::RenderWindow &window) {
+    for (const Hexagon &hexagon: hexagons) {
         hexagon.draw(window);
     }
 }
 
+void Board::setCurrentPlayer(Player player) {
+    currentPlayer = player;
+}
 
-void Board::mouseClick(const sf::Event& event) {
+Player Board::getCurrentPlayer() {
+    return currentPlayer;
+}
+
+void Board::mouseClick(const sf::Event &event, Player &player) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-        for (Hexagon& hexagon : hexagons) {
+        for (Hexagon &hexagon: hexagons) {
             if (hexagon.contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)) &&
-                hexagon.getFillColor() != sf::Color::Transparent && hexagon.getFillColor() != sf::Color::Blue) {
-                hexagon.setOutlineColor(sf::Color::Cyan);
+                hexagon.getFillColor() != sf::Color::Transparent &&
+                hexagon.getOutlineColor() != sf::Color::Cyan &&
+                hexagon.getFillColor() == player.getColor()) {
+
+                sf::Vector2f clickedPosition = hexagon.getPosition();
+                for (Hexagon &neighbourHexagon: hexagons) {
+                    if (neighbourHexagon.getFillColor() != sf::Color::Transparent &&
+                        std::abs(hexagon.getPosition().x - neighbourHexagon.getPosition().x) <= radius * 2 &&
+                        std::abs(hexagon.getPosition().y - neighbourHexagon.getPosition().y) <= radius * 2) {
+                        neighbourHexagon.setOutlineColor(sf::Color::Cyan);
+                    }
+                }
+            }
+        }
+    }
+}
+
+void Board::hexagonColorChange(const sf::Event &event, Player &player) {
+    if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+        for (Hexagon &hexagon: hexagons) {
+            if (hexagon.getOutlineColor() == sf::Color::Cyan &&
+                hexagon.contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)) &&
+                hexagon.getFillColor() != player.getColor()) {
+                sf::Color changeColor = player.getColor();
+                hexagon.setOutlineColor(sf::Color::Black);
+                hexagon.setFillColor(changeColor);
 
             }
         }

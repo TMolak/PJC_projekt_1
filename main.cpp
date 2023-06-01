@@ -1,14 +1,10 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Board.h"
-
+#include "Player.h"
 
 using namespace std;
 
-enum class Player{
-    Player_One,
-    Player_Two
-};
 
 int main() {
 
@@ -40,11 +36,12 @@ int main() {
 
     window.clear(sf::Color::White);
 
+    Player playerOne(sf::Color::Yellow);
+    Player playerTwo(sf::Color::Red);
+
     Board board(boardPattern);
 
-    Player currentPlayer = Player::Player_One;
-
-    Hexagon* selectedHexagon = nullptr;
+    board.setCurrentPlayer(playerOne);
 
     while (window.isOpen()) {
         sf::Event event;
@@ -53,11 +50,14 @@ int main() {
                 window.close();
             }
             if (event.type == sf::Event::MouseButtonPressed) {
-
-                board.mouseClick(event);
+                board.mouseClick(event, playerOne);
+                board.hexagonColorChange(event, playerOne);
             }
+
         }
         board.draw(window);
         window.display();
+
+
     }
 }

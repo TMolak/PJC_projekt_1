@@ -15,6 +15,9 @@ void Hexagon::setFillColor(sf::Color color) {
 void Hexagon::setOutlineColor(sf::Color color) {
     shape.setOutlineColor(color);
 }
+sf::Color Hexagon::getOutlineColor() {
+    shape.getOutlineColor();
+}
 
 void Hexagon::setOutlineThickness(float thickness) {
     shape.setOutlineThickness(thickness);
