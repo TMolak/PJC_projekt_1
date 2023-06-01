@@ -8,8 +8,11 @@ private:
     sf::Color color;
 public:
     Player(sf::Color playerColor);
+
+    Player();
+
     sf::Color getColor() const;
-    bool getIsYellow() const;
+
 };
 
 

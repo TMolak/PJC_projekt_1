@@ -10,13 +10,13 @@ public:
     Board(int pattern[17][9]);
 
     void draw(sf::RenderWindow& window);
-    void mouseClick(const sf::Event& event, Player& player);
-    void hexagonColorChange(const sf::Event &event, Player& player);
+    void mouseClick(const sf::Event& event, Player player);
+    void hexagonColorChange(const sf::Event &event, Player player);
     void setCurrentPlayer(Player player);
     Player getCurrentPlayer();
 private:
     std::vector<Hexagon> hexagons;
-    Player currentPlayer = Player(sf::Color());
+    Player currentPlayer;
 };
 
 #endif // BOARD_H

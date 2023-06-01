@@ -3,25 +3,6 @@
 #include <cmath>
 
 const float radius = 30.0f;
-int boardPattern[17][9] = {
-        {0, 0, 0, 0, 4, 0, 0, 0, 0},
-        {0, 0, 0, 1, 1, 0, 0, 0, 0},
-        {0, 0, 0, 1, 1, 1, 0, 0, 0},
-        {0, 0, 1, 1, 1, 1, 0, 0, 0},
-        {0, 0, 3, 1, 1, 1, 3, 0, 0},
-        {0, 0, 1, 1, 1, 1, 0, 0, 0},
-        {0, 0, 1, 1, 2, 1, 1, 0, 0},
-        {0, 0, 1, 1, 1, 1, 0, 0, 0},
-        {0, 0, 1, 1, 1, 1, 1, 0, 0},
-        {0, 0, 1, 2, 2, 1, 0, 0, 0},
-        {0, 0, 1, 1, 1, 1, 1, 0, 0},
-        {0, 0, 1, 1, 1, 1, 0, 0, 0},
-        {0, 0, 4, 1, 1, 1, 4, 0, 0},
-        {0, 0, 1, 1, 1, 1, 0, 0, 0},
-        {0, 0, 0, 1, 1, 1, 0, 0, 0},
-        {0, 0, 0, 1, 1, 0, 0, 0, 0},
-        {0, 0, 0, 0, 3, 0, 0, 0, 0}
-};
 
 Board::Board(int pattern[17][9]) {
     for (int i = 0; i < 17; i++) {
@@ -74,7 +55,7 @@ Player Board::getCurrentPlayer() {
     return currentPlayer;
 }
 
-void Board::mouseClick(const sf::Event &event, Player &player) {
+void Board::mouseClick(const sf::Event &event, Player player) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         for (Hexagon &hexagon: hexagons) {
             if (hexagon.contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)) &&
@@ -92,10 +73,11 @@ void Board::mouseClick(const sf::Event &event, Player &player) {
                 }
             }
         }
+
     }
 }
 
-void Board::hexagonColorChange(const sf::Event &event, Player &player) {
+void Board::hexagonColorChange(const sf::Event &event, Player player) {
     if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         for (Hexagon &hexagon: hexagons) {
             if (hexagon.getOutlineColor() == sf::Color::Cyan &&

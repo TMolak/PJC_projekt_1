@@ -9,3 +9,5 @@ Player::Player(sf::Color playerColor) {
 sf::Color Player::getColor() const {
     return color;
 }
+
+Player::Player() {}
