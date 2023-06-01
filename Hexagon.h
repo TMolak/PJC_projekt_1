@@ -10,6 +10,8 @@ public:
     sf::Color getFillColor() const;
     sf::Vector2f getPosition();
     sf::Color getOutlineColor();
+    void setTexture(const sf::Texture& texture);
+    const sf::Texture* getTexture() const;
     void setOutlineColor(sf::Color color);
     void setOutlineThickness(float thickness);
     void setPosition(sf::Vector2f position);

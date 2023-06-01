@@ -6,8 +6,15 @@ Hexagon::Hexagon(float radius, sf::Vector2f position) : shape(radius, 6){
     shape.setFillColor(sf::Color::Transparent);
     shape.setOutlineThickness(2.f);
     shape.setPosition(position);
+    shape.setTexture(nullptr);
+}
+void Hexagon::setTexture(const sf::Texture& texture) {
+    shape.setTexture(&texture);
 }
 
+const sf::Texture* Hexagon::getTexture() const {
+    return shape.getTexture();
+}
 void Hexagon::setFillColor(sf::Color color) {
     shape.setFillColor(color);
 }

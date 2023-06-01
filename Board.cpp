@@ -14,21 +14,34 @@ Board::Board(int pattern[17][9]) {
                 x += radius * 1.7;
             }
             position = {x, y};
+            sf::Texture textureFalcon;
+            sf::Texture textureTie;
+            sf::Texture textureLogo;
+
             Hexagon hexagon(radius, position);
 
             sf::Angle rotation(90);
             if (pattern[i][j] == 1) {
-                hexagon.setFillColor(sf::Color::Magenta);
-                hexagon.setOutlineColor(sf::Color::Black);
+                if (textureLogo.loadFromFile("C:\\Users\\tomek\\CLionProjects\\PJC_projekt_1\\pictures\\logo.jpg")) {
+                    hexagon.setTexture(textureLogo);
+                    hexagon.setFillColor(sf::Color::Magenta);
+                    hexagon.setOutlineColor(sf::Color::Black);
+                }
             } else if (pattern[i][j] == 2) {
                 hexagon.setFillColor(sf::Color::Transparent);
             } else if (pattern[i][j] == 3) {
-                hexagon.setFillColor(sf::Color::Yellow);
+                if (textureFalcon.loadFromFile("C:\\Users\\tomek\\CLionProjects\\PJC_projekt_1\\pictures\\falcon.jpg")) {
+                    hexagon.setTexture(textureFalcon);
+                    hexagon.setFillColor(sf::Color::Yellow);
+                    hexagon.setOutlineColor(sf::Color::Black);
+                }
 
-                hexagon.setOutlineColor(sf::Color::Black);
             } else if (pattern[i][j] == 4) {
-                hexagon.setFillColor(sf::Color::Red);
-                hexagon.setOutlineColor(sf::Color::Black);
+                if (textureTie.loadFromFile("C:\\Users\\tomek\\CLionProjects\\PJC_projekt_1\\pictures\\tie.jpg")) {
+                    hexagon.setTexture(textureTie);
+                    hexagon.setFillColor(sf::Color::Red);
+                    hexagon.setOutlineColor(sf::Color::Black);
+                }
             } else {
                 hexagon.setFillColor(sf::Color::Transparent);
             }
