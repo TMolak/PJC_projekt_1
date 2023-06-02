@@ -143,4 +143,22 @@ void Board::colorAttack(sf::Event &event) {
     }
 }
 
+int Board::playerOnePoints(){
+    int result = 0;
+    for (Hexagon &hexagon: hexagons) {
+        if (hexagon.getFillColor()==sf::Color::Yellow){
+            result++;
+        }
+    }
+    return result;
+}
+int Board::playerTwoPoints() {
+    int result = 0;
+    for (Hexagon &hexagon: hexagons) {
+        if (hexagon.getFillColor()==sf::Color::Red){
+            result++;
+        }
+    }
+    return result;
+}
 

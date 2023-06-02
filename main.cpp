@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <cmath>
 #include "Board.h"
 #include "Player.h"
 
@@ -178,20 +179,25 @@ int main() {
     Player playerOne(sf::Color::Yellow);
     Player playerTwo(sf::Color::Red);
 
+    int playerOneScoreValue = 0;
+    int playerTwoScoreValue = 0;
+
     sf::Text playerOneScore(font);
-    playerOneScore.setString("Hexagony gracza 1 :");
+    playerOneScore.setString("Hexagony gracza 1 :" + std::to_string(playerOneScoreValue));
+//playerOneScore.setString("Hexagony gracza 1 :");
     playerOneScore.setCharacterSize(fontSize);
     playerOneScore.setFillColor(sf::Color::White);
     playerOneScore.setPosition({100, 800});
 
     sf::Text playerTwoScore(font);
-    playerTwoScore.setString("Hexagony gracza 2 :");
+    playerTwoScore.setString("Hexagony gracza 2 :" + std::to_string(playerTwoScoreValue));
+//    playerTwoScore.setString("Hexagony gracza 2 :");
     playerTwoScore.setCharacterSize(fontSize);
     playerTwoScore.setFillColor(sf::Color::White);
     playerTwoScore.setPosition({100, 840});
 
     Board board(boardPattern);
-
+    double playerNum = 1.0;
     while (window.isOpen()) {
         MenuOption option = showMenuWindow(window, font);
 
@@ -210,7 +216,6 @@ int main() {
                 // Pętla gry w nowym oknie
                 while (gameWindow.isOpen()) {
                     sf::Event event;
-
                     while (gameWindow.pollEvent(event)) {
                         if (event.type == sf::Event::Closed) {
                             gameWindow.close();
@@ -223,6 +228,40 @@ int main() {
                             }
                         }
                     }
+                    playerOneScoreValue = board.playerOnePoints();
+                    playerTwoScoreValue = board.playerTwoPoints();
+                    playerOneScore.setString("Hexagony gracza 1 : " + std::to_string(playerOneScoreValue));
+                    playerTwoScore.setString("Hexagony gracza 2 : " + std::to_string(playerTwoScoreValue));
+
+                    if (board.playerOnePoints() == 58 || board.playerTwoPoints() == 58) {
+                        gameWindow.close();
+                        std::string winner;
+                        if (board.playerOnePoints() == 58) {
+                            winner = "Gracz 1";
+                        } else {
+                            winner = "Gracz 2";
+                        }
+                        sf::RenderWindow endGameWindow(sf::VideoMode({400, 200}), "Koniec gry");
+                        sf::Text endGameText(font);
+                        endGameText.setString("Koniec gry, wygral/a \n" + winner);
+                        endGameText.setCharacterSize(24);
+                        endGameText.setFillColor(sf::Color::Red);
+                        endGameText.setPosition({50, 50});
+                        while (endGameWindow.isOpen()) {
+                            sf::Event event;
+                            while (endGameWindow.pollEvent(event)) {
+                                if (event.type == sf::Event::Closed) {
+                                    endGameWindow.close();
+                                }
+                            }
+
+                            endGameWindow.clear(sf::Color::Black);
+                            endGameWindow.draw(endGameText);
+                            endGameWindow.display();
+                        }
+                        break;
+                    }
+
                     gameWindow.clear(sf::Color::White);
                     sf::Sprite backgroundSprite(background);
                     gameWindow.draw(backgroundSprite);

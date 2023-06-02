@@ -23,7 +23,7 @@ void Hexagon::setOutlineColor(sf::Color color) {
     shape.setOutlineColor(color);
 }
 sf::Color Hexagon::getOutlineColor() {
-    shape.getOutlineColor();
+    return shape.getOutlineColor();
 }
 
 void Hexagon::setOutlineThickness(float thickness) {
