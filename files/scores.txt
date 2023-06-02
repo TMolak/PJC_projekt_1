@@ -3,3 +3,5 @@ Gre  2 wygral/a Gracz 1
 Gre  3 wygral/a Gracz 2
 Gre  4 wygral/a Gracz 2
 Gre  5 wygral/a Gracz 1
+Gre  1 wygral/a Komputer
+Gre  1 wygral/a Komputer

@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <fstream>
+#include <random>
 #include "Board.h"
 #include "Player.h"
 
@@ -200,9 +201,9 @@ int main() {
     sf::RenderWindow window(sf::VideoMode({x, y}), "Hexxagon",
                             sf::Style::Default,
                             sf::ContextSettings(0, 0, 8));
-/**
- * Tworzenie obiektu Texture do ustawienia obrazka w tle aplikacji
- */
+    /**
+    * Tworzenie obiektu Texture do ustawienia obrazka w tle aplikacji
+    */
     sf::Texture background;
     /**
      * Sprawdzenie czy obrazek się zaladowal
@@ -232,9 +233,9 @@ int main() {
      */
     int playerOneScoreValue = 0;
     int playerTwoScoreValue = 0;
-/**
- * Stworzenie obiektow Text wyswietlajacych punkty graczy
- */
+    /**
+    * Stworzenie obiektow Text wyswietlajacych punkty graczy
+    */
     sf::Text playerOneScore(font);
     playerOneScore.setString("Hexagony gracza 1 :" + std::to_string(playerOneScoreValue));
     playerOneScore.setCharacterSize(fontSize);
@@ -310,9 +311,9 @@ int main() {
                             }
                         }
                     }
-/**
- * Wywoalnie metod zliczajacych ilosc szesciokatow kazdego gracza i dodanie ich do textu do wyswietlenia
- */
+                    /**
+                    * Wywoalnie metod zliczajacych ilosc szesciokatow kazdego gracza i dodanie ich do textu do wyswietlenia
+                    */
                     playerOneScoreValue = board.playerOnePoints();
                     playerTwoScoreValue = board.playerTwoPoints();
                     playerOneScore.setString("Hexagony gracza 1 : " + std::to_string(playerOneScoreValue));
@@ -363,9 +364,9 @@ int main() {
                         }
                         break;
                     }
-/**
- * Dodanie elementow do okna, ustawienie tla, wyswietlenie i odswiezenie informacji
- */
+                    /**
+                    * Dodanie elementow do okna, ustawienie tla, wyswietlenie i odswiezenie informacji
+                    */
                     gameWindow.clear(sf::Color::White);
                     sf::Sprite backgroundSprite(background);
                     gameWindow.draw(backgroundSprite);
@@ -379,8 +380,8 @@ int main() {
                  * Stworzenie okna dla rozgrywki
                  */
                 sf::RenderWindow pvcWindow(sf::VideoMode({1920, 1080}), "Hexxagon",
-                                            sf::Style::Default,
-                                            sf::ContextSettings(0, 0, 8));
+                                           sf::Style::Default,
+                                           sf::ContextSettings(0, 0, 8));
                 /**
                  * Stworzenie obiektu planszy z przekazaniem wczesniej zainicjowanej tablicy
                  */
@@ -390,6 +391,7 @@ int main() {
                 while (pvcWindow.isOpen()) {
                     sf::Event event;
                     while (pvcWindow.pollEvent(event)) {
+
 
                         if (event.type == sf::Event::Closed) {
                             pvcWindow.close();
@@ -410,121 +412,141 @@ int main() {
                                 board.colorAttack(event);
                                 board.hexagonColorChange(event, playerOne);
                             }
-                        }
-                    }
-/**
- * Wywoalnie metod zliczajacych ilosc szesciokatow kazdego gracza i dodanie ich do textu do wyswietlenia
- */
-                    playerOneScoreValue = board.playerOnePoints();
-                    playerTwoScoreValue = board.playerTwoPoints();
-                    playerOneScore.setString("Hexagony gracza 1 : " + std::to_string(playerOneScoreValue));
-                    playerTwoScore.setString("Hexagony Komputera : " + std::to_string(playerTwoScoreValue));
-
-                    /**
-                     * Obsluga wygranej w przypadku gdy jeden z graczy osiagnie maksymalna liczbe szesciokatow na planszy
-                     */
-                    if (board.playerOnePoints() >= 58 || board.playerTwoPoints() >= 58) {
-                        pvcWindow.close();
-                        std::string winner;
-                        if (board.playerOnePoints() >= 58) {
-                            winner = "Gracz";
-                        } else {
-                            winner = "Komputer";
-                        }
-                        gameCont++;
-                        /**
-                         * Zainicjowanie okna informujacego o koncu gry i wygranej gracza lub komputera
-                         */
-                        sf::RenderWindow endGameWindow(sf::VideoMode({400, 200}), "Koniec gry");
-                        sf::Text endGameText(font);
-                        endGameText.setString("Koniec gry, wygral/a \n" + winner);
-                        endGameText.setCharacterSize(24);
-                        endGameText.setFillColor(sf::Color::Red);
-                        endGameText.setPosition({50, 50});
-                        /**
-                         * Zapisywanie informacji o wygranej do pliku
-                         */
-                        std::fstream fileOut;
-                        fileOut.open("C:\\Users\\tomek\\CLionProjects\\PJC_projekt_1\\files\\scores.txt",
-                                     std::ios::app);
-                        if (fileOut.is_open()) {
-                            fileOut << "Gre  " << gameCont << " wygral/a " << winner << endl;
-                            fileOut.close();
-                        }
-                        while (endGameWindow.isOpen()) {
-                            sf::Event event;
-                            while (endGameWindow.pollEvent(event)) {
-                                if (event.type == sf::Event::Closed) {
-                                    endGameWindow.close();
+                            /**
+                             * Niezbyt udana proba utworzenia losowego ruchu komputera
+                             */
+                        } else if (board.getCurrentPlayer().getColor() == sf::Color::Red &&
+                                   event.mouseButton.button == sf::Mouse::Right) {
+                            std::vector<Hexagon *> availableHexagons;
+                            for (Hexagon &hexagon: board.getHexagons()) {
+                                if (hexagon.getFillColor() != sf::Color::Transparent) {
+                                    availableHexagons.push_back(&hexagon);
                                 }
                             }
+                            if (!availableHexagons.empty()) {
+                                srand((unsigned) time(NULL));
 
-                            endGameWindow.clear(sf::Color::Black);
-                            endGameWindow.draw(endGameText);
-                            endGameWindow.display();
+                                int random = (1 + rand() % 57);
+                                Hexagon *selectedHexagon = availableHexagons[random];
+                                selectedHexagon->setFillColor(playerTwo.getColor());
+                                playerOne.setColor(sf::Color::Yellow);
+                            }
                         }
-                        break;
+                        /**
+                         * Wywolanie metod zliczajacych ilosc szesciokatow kazdego gracza i dodanie ich do textu do wyswietlenia
+                         */
+                        playerOneScoreValue = board.playerOnePoints();
+                        playerTwoScoreValue = board.playerTwoPoints();
+                        playerOneScore.setString("Hexagony gracza 1 : " + std::to_string(playerOneScoreValue));
+                        playerTwoScore.setString("Hexagony Komputera : " + std::to_string(playerTwoScoreValue));
+
+                        /**
+                         * Obsluga wygranej w przypadku gdy jeden z graczy osiagnie maksymalna liczbe szesciokatow na planszy
+                         */
+                        if (board.playerOnePoints() >= 58 || board.playerTwoPoints() >= 58) {
+                            pvcWindow.close();
+                            std::string winner;
+                            if (board.playerOnePoints() >= 58) {
+                                winner = "Gracz";
+                            } else {
+                                winner = "Komputer";
+                            }
+                            gameCont++;
+                            /**
+                             * Zainicjowanie okna informujacego o koncu gry i wygranej gracza lub komputera
+                             */
+                            sf::RenderWindow endGameWindow(sf::VideoMode({400, 200}), "Koniec gry");
+                            sf::Text endGameText(font);
+                            endGameText.setString("Koniec gry, wygral/a \n" + winner);
+                            endGameText.setCharacterSize(24);
+                            endGameText.setFillColor(sf::Color::Red);
+                            endGameText.setPosition({50, 50});
+                            /**
+                             * Zapisywanie informacji o wygranej do pliku
+                             */
+                            std::fstream fileOut;
+                            fileOut.open("C:\\Users\\tomek\\CLionProjects\\PJC_projekt_1\\files\\scores.txt",
+                                         std::ios::app);
+                            if (fileOut.is_open()) {
+                                fileOut << "Gre  " << gameCont << " wygral/a " << winner << endl;
+                                fileOut.close();
+                            }
+                            while (endGameWindow.isOpen()) {
+                                sf::Event event;
+                                while (endGameWindow.pollEvent(event)) {
+                                    if (event.type == sf::Event::Closed) {
+                                        endGameWindow.close();
+                                    }
+                                }
+
+                                endGameWindow.clear(sf::Color::Black);
+                                endGameWindow.draw(endGameText);
+                                endGameWindow.display();
+                            }
+                            break;
+                        }
+                        /**
+                         * Dodanie elementow do okna, ustawienie tla, wyswietlenie i odswiezenie informacji
+                         */
+                        pvcWindow.clear(sf::Color::White);
+                        sf::Sprite backgroundSprite(background);
+                        pvcWindow.draw(backgroundSprite);
+                        board.draw(pvcWindow);
+                        pvcWindow.draw(playerOneScore);
+                        pvcWindow.draw(playerTwoScore);
+                        pvcWindow.display();
                     }
-/**
- * Dodanie elementow do okna, ustawienie tla, wyswietlenie i odswiezenie informacji
- */
-                    pvcWindow.clear(sf::Color::White);
+                }
+            } else if (option == MenuOption::LoadGame) {
+
+            } else if (option == MenuOption::HighScores) {
+                sf::RenderWindow highScoresWindow(sf::VideoMode({1920, 1080}), "HighScores",
+                                                  sf::Style::Default,
+                                                  sf::ContextSettings(0, 0, 8));
+
+
+                std::vector<std::string> scores;
+                std::fstream fileIn;
+                /**
+                 * Zczytywanie linii z pliku i dodawanie ich do vecotra scores
+                */
+                fileIn.open("C:\\Users\\tomek\\CLionProjects\\PJC_projekt_1\\files\\scores.txt", std::ios::in);
+                if (fileIn.is_open()) {
+                    std::string line;
+                    while (std::getline(fileIn, line)) {
+                        scores.push_back(line);
+                    }
+                    fileIn.close();
+                }
+                sf::Text text(font);
+                text.setCharacterSize(fontSize);
+                text.setFillColor(sf::Color::White);
+                while (highScoresWindow.isOpen()) {
+                    sf::Event event;
+                    while (highScoresWindow.pollEvent(event)) {
+                        if (event.type == sf::Event::Closed) {
+                            highScoresWindow.close();
+                        }
+                    }
+
+                    highScoresWindow.clear(sf::Color::White);
                     sf::Sprite backgroundSprite(background);
-                    pvcWindow.draw(backgroundSprite);
-                    board.draw(pvcWindow);
-                    pvcWindow.draw(playerOneScore);
-                    pvcWindow.draw(playerTwoScore);
-                    pvcWindow.display();
-                }
-            }
-        } else if (option == MenuOption::LoadGame) {
+                    highScoresWindow.draw(backgroundSprite);
 
-        } else if (option == MenuOption::HighScores) {
-            sf::RenderWindow highScoresWindow(sf::VideoMode({1920, 1080}), "HighScores",
-                                              sf::Style::Default,
-                                              sf::ContextSettings(0, 0, 8));
-
-
-            std::vector<std::string> scores;
-            std::fstream fileIn;
-/**
- * Zczytywanie linii z pliku i dodawanie ich do vecotra scores
- */
-            fileIn.open("C:\\Users\\tomek\\CLionProjects\\PJC_projekt_1\\files\\scores.txt", std::ios::in);
-            if (fileIn.is_open()) {
-                std::string line;
-                while (std::getline(fileIn, line)) {
-                    scores.push_back(line);
-                }
-                fileIn.close();
-            }
-            sf::Text text(font);
-            text.setCharacterSize(fontSize);
-            text.setFillColor(sf::Color::White);
-            while (highScoresWindow.isOpen()) {
-                sf::Event event;
-                while (highScoresWindow.pollEvent(event)) {
-                    if (event.type == sf::Event::Closed) {
-                        highScoresWindow.close();
+                    /**
+                     * Wyswietlanie wartosci zapisanych w wektozre na ekran
+                    */
+                    float startY = 100.0f;
+                    for (const auto &score: scores) {
+                        text.setString(score);
+                        text.setPosition({50.0f, startY});
+                        highScoresWindow.draw(text);
+                        startY += 50.0f;
                     }
+                    highScoresWindow.display();
                 }
-
-                highScoresWindow.clear(sf::Color::White);
-                sf::Sprite backgroundSprite(background);
-                highScoresWindow.draw(backgroundSprite);
-/**
- * Wyswietlanie wartosci zapisanych w wektozre na ekran
- */
-                float startY = 100.0f;
-                for (const auto& score : scores) {
-                    text.setString(score);
-                    text.setPosition({50.0f, startY});
-                    highScoresWindow.draw(text);
-                    startY += 50.0f;
-                }
-                highScoresWindow.display();
             }
         }
-    }
 
+    }
 }
