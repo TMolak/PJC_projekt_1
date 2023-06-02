@@ -11,7 +11,7 @@ public:
 
     void draw(sf::RenderWindow& window);
     void closeHexagons(sf::Event& event);
-    void hexagonColorChange(sf::Event& event);
+    void hexagonColorChange(sf::Event& event, Player& player);
     void setCurrentPlayer(Player player);
     Player getCurrentPlayer();
     std::vector<Hexagon>& getHexagons();

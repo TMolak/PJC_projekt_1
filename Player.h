@@ -12,7 +12,7 @@ public:
     Player();
 
     sf::Color getColor() const;
-
+    void setColor(sf::Color colorChange);
 };
 
 

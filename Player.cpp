@@ -11,3 +11,7 @@ sf::Color Player::getColor() const {
 }
 
 Player::Player() {}
+
+void Player::setColor(sf::Color colorChange) {
+    color = colorChange;
+}
