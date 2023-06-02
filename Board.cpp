@@ -43,8 +43,6 @@ Board::Board(int pattern[17][9]) {
                     hexagon.setFillColor(sf::Color::Red);
                     hexagon.setOutlineColor(sf::Color::Black);
                 }
-            } else if (pattern[i][j] == 5) {
-                hexagon.setOutlineColor(sf::Color::Cyan);
             } else {
                 hexagon.setFillColor(sf::Color::Transparent);
             }
@@ -89,13 +87,11 @@ void Board::closeHexagons(sf::Event &event) {
                 if (neighbourHexagon.getFillColor() != sf::Color::Transparent &&
                     std::abs(hexagon.getPosition().x - neighbourHexagon.getPosition().x) <= radius * 2 &&
                     std::abs(hexagon.getPosition().y - neighbourHexagon.getPosition().y) <= radius * 2) {
+
                     neighbourHexagon.setOutlineColor(sf::Color::Cyan);
-
-                }else{
-                    hexagonColorChange(event);
                 }
-
             }
+
         }
     }
 
@@ -103,16 +99,48 @@ void Board::closeHexagons(sf::Event &event) {
 
 void Board::hexagonColorChange(sf::Event &event) {
     for (Hexagon &hexagon: hexagons) {
-        if (hexagon.getOutlineColor() == sf::Color::Cyan &&
-            hexagon.contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)) &&
+        if (hexagon.contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)) &&
+            hexagon.getFillColor() != sf::Color::Transparent &&
+            hexagon.getOutlineColor() != sf::Color::Red &&
+            hexagon.getOutlineColor() != sf::Color::White &&
+            hexagon.getOutlineColor() != sf::Color::Green &&
+            hexagon.getOutlineColor() != sf::Color::Blue &&
+            hexagon.getOutlineColor() != sf::Color::Yellow &&
+            hexagon.getOutlineColor() != sf::Color::Magenta &&
+            hexagon.getOutlineColor() != sf::Color::Transparent &&
+            hexagon.getOutlineColor() != sf::Color::Black &&
             hexagon.getFillColor() != currentPlayer.getColor()) {
+
             sf::Color changeColor = currentPlayer.getColor();
-            hexagon.setOutlineColor(sf::Color::Black);
             hexagon.setFillColor(changeColor);
+            sf::Vector2f clickedPosition = hexagon.getPosition();
+
+            for (Hexagon &neighbourHexagon: hexagons) {
+                if (neighbourHexagon.getFillColor() != sf::Color::Transparent) {
+                    neighbourHexagon.setOutlineColor(sf::Color::Black);
+                }
+            }
+            hexagon.setOutlineColor(sf::Color::Black);
         }
     }
 }
 
+void Board::colorAttack(sf::Event &event) {
+    for (Hexagon &hexagon: hexagons) {
+        for (Hexagon &neighbourHexagon: hexagons) {
+            if (hexagon.contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)) &&
+                neighbourHexagon.getFillColor() != sf::Color::Transparent &&
+                neighbourHexagon.getFillColor() != sf::Color::Magenta &&
+                neighbourHexagon.getFillColor() != currentPlayer.getColor() &&
+                std::abs(hexagon.getPosition().x - neighbourHexagon.getPosition().x) <= radius * 2 &&
+                std::abs(hexagon.getPosition().y - neighbourHexagon.getPosition().y) <= radius * 2) {
 
+                sf::Vector2f clickedPosition = hexagon.getPosition();
+                sf::Color changeColor = currentPlayer.getColor();
+                neighbourHexagon.setFillColor(changeColor);
+            }
+        }
+    }
+}
 
 

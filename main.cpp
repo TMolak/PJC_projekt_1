@@ -6,6 +6,7 @@
 using namespace std;
 
 const float radius = 30.0f;
+const int fontSize = 35;
 const int x = 1920;
 const int y = 1080;
 
@@ -46,25 +47,25 @@ MenuOption showMenuWindow(sf::RenderWindow &window, sf::Font &font) {
 
     sf::Text newGameText(font);
     newGameText.setString("Nowa gra");
-    newGameText.setCharacterSize(24);
+    newGameText.setCharacterSize(fontSize);
     newGameText.setFillColor(sf::Color::White);
     newGameText.setPosition({100, (y / 2 - 100)});
 
     sf::Text loadGameText(font);
     loadGameText.setString("Wczytaj gre");
-    loadGameText.setCharacterSize(24);
+    loadGameText.setCharacterSize(fontSize);
     loadGameText.setFillColor(sf::Color::White);
     loadGameText.setPosition({100, (y / 2 - 100) + 50});
 
     sf::Text highScoresText(font);
     highScoresText.setString("Najlepsze wyniki");
-    highScoresText.setCharacterSize(24);
+    highScoresText.setCharacterSize(fontSize);
     highScoresText.setFillColor(sf::Color::White);
     highScoresText.setPosition({100, (y / 2 - 100) + 100});
 
     sf::Text exitText(font);
     exitText.setString("Wyjscie");
-    exitText.setCharacterSize(24);
+    exitText.setCharacterSize(fontSize);
     exitText.setFillColor(sf::Color::White);
     exitText.setPosition({100, (y / 2 - 100) + 150});
 
@@ -112,13 +113,13 @@ MenuOption showMenuWindow(sf::RenderWindow &window, sf::Font &font) {
 GameMode showGameModeMenu(sf::RenderWindow &window, sf::Font &font) {
     sf::Text PvP(font);
     PvP.setString("Gra na innego gracza");
-    PvP.setCharacterSize(24);
+    PvP.setCharacterSize(fontSize);
     PvP.setFillColor(sf::Color::White);
     PvP.setPosition({100, (y / 2 - 100)});
 
     sf::Text PvC(font);
     PvC.setString("Gra z komputerem");
-    PvC.setCharacterSize(24);
+    PvC.setCharacterSize(fontSize);
     PvC.setFillColor(sf::Color::White);
     PvC.setPosition({100, (y / 2 - 100) + 50});
 
@@ -179,20 +180,17 @@ int main() {
 
     sf::Text playerOneScore(font);
     playerOneScore.setString("Hexagony gracza 1 :");
-    playerOneScore.setCharacterSize(24);
+    playerOneScore.setCharacterSize(fontSize);
     playerOneScore.setFillColor(sf::Color::White);
     playerOneScore.setPosition({100, 800});
 
     sf::Text playerTwoScore(font);
     playerTwoScore.setString("Hexagony gracza 2 :");
-    playerTwoScore.setCharacterSize(24);
+    playerTwoScore.setCharacterSize(fontSize);
     playerTwoScore.setFillColor(sf::Color::White);
     playerTwoScore.setPosition({100, 840});
 
     Board board(boardPattern);
-
-
-    int turn = 1;
 
     while (window.isOpen()) {
         MenuOption option = showMenuWindow(window, font);
@@ -207,29 +205,24 @@ int main() {
                                             sf::Style::Default,
                                             sf::ContextSettings(0, 0, 8));
 
-
                 Board board(boardPattern);
 
                 // Pętla gry w nowym oknie
                 while (gameWindow.isOpen()) {
                     sf::Event event;
-                    if (turn % 2 != 0) {
-                        board.setCurrentPlayer(playerOne);
-                    } else {
-                        board.setCurrentPlayer(playerTwo);
-                    }
+
                     while (gameWindow.pollEvent(event)) {
                         if (event.type == sf::Event::Closed) {
                             gameWindow.close();
-                        } else if (event.type == sf::Event::MouseButtonPressed &&
-                                   event.mouseButton.button == sf::Mouse::Left) {
-                            board.closeHexagons(event);
+                        } else if (event.type == sf::Event::MouseButtonPressed) {
+                            if (event.mouseButton.button == sf::Mouse::Left) {
+                                board.setCurrentPlayer(playerOne);
+                                board.closeHexagons(event);
+                                board.colorAttack(event);
+                                board.hexagonColorChange(event);
+                            }
                         }
-                        turn++;
                     }
-                    // Aktualizacja stanu gry
-
-                    // Czyszczenie, rysowanie i wyświetlanie planszy oraz innych elementów gry
                     gameWindow.clear(sf::Color::White);
                     sf::Sprite backgroundSprite(background);
                     gameWindow.draw(backgroundSprite);

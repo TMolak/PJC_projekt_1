@@ -15,6 +15,7 @@ public:
     void setCurrentPlayer(Player player);
     Player getCurrentPlayer();
     std::vector<Hexagon>& getHexagons();
+    void colorAttack(sf::Event &event);
 private:
     std::vector<Hexagon> hexagons;
     Player currentPlayer;
